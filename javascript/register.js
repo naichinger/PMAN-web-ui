@@ -1,3 +1,5 @@
+import { PMAN_IP } from '/javascript/constants.js';
+
 document.getElementById("register-form").addEventListener("submit", function(e) {
     const params = {
         username: document.getElementById("form-username").value,
@@ -14,7 +16,7 @@ document.getElementById("register-form").addEventListener("submit", function(e) 
         },
         body: json_params
     };
-    fetch( 'http://localhost:8080/auth/register', options )
+    fetch( PMAN_IP + '/auth/register', options )
         .then( response => {
             console.log(response);
             if(response.ok) {

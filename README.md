@@ -3,8 +3,12 @@
 Basic UI for testing the PMAN password manager
 
 # How to Use
-To start the UI simply enter following command (uses php for server)
+To run build the image using the Dockerfile and run it
 
 ```bash
-./start.sh
+docker build -t pmanui .
+```
+
+```bash
+docker run --name pmanui -p 80:80 -d pmanui
 ```

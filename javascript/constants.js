@@ -1,0 +1,1 @@
+export const PMAN_IP = 'http://localhost:8080';

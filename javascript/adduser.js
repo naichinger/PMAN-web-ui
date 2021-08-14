@@ -1,4 +1,5 @@
 import { getCookie } from '/javascript/cookies.js';
+import { PMAN_IP } from '/javascript/constants.js';
 
 document.getElementById("add-user-form").addEventListener("submit", function (e) {
     const params = {
@@ -17,7 +18,7 @@ document.getElementById("add-user-form").addEventListener("submit", function (e)
         },
         body: json_params
     };
-    fetch( 'http://localhost:8080/overview/add', options )
+    fetch( PMAN_IP + '/overview/add', options )
         .then( response => {
             console.log(response);
             if(response.ok) {

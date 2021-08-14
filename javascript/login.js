@@ -1,4 +1,5 @@
 import { setCookie } from '/javascript/cookies.js';
+import { PMAN_IP } from '/javascript/constants.js';
 
 document.getElementById("login-form").addEventListener("submit", function(e) {
     const params = {
@@ -15,7 +16,7 @@ document.getElementById("login-form").addEventListener("submit", function(e) {
         },
         body: json_params
     };
-    fetch( 'http://localhost:8080/auth/login', options )
+    fetch( PMAN_IP + '/auth/login', options )
         .then( response => response.text())
         .then( response => {
             setCookie('token', response, 1);

@@ -1,5 +1,6 @@
 import { getCookie } from '/javascript/cookies.js';
 import { logout } from '/javascript/account.js';
+import { PMAN_IP } from '/javascript/constants.js';
 
 const usersMap = new Map();
 const selWebsite = document.getElementById("selected-website");
@@ -39,7 +40,7 @@ if (token === '') {
             "Token": token
         }
     };
-    fetch('http://localhost:8080/overview', options)
+    fetch(PMAN_IP + '/overview', options)
         .then(response => {
             if (!response.ok) {
                 logout();
