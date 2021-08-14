@@ -1,7 +1,14 @@
 import { setCookie } from '/javascript/cookies.js';
 import { PMAN_IP } from '/javascript/constants.js';
 
-document.getElementById("login-form").addEventListener("submit", function(e) {
+var notification_div = document.getElementById("notification-div");
+
+function sendNotification(message) {
+    notification_div.style.display = 'block';
+    notification_div.innerHTML = message;
+}
+
+document.getElementById("login-form").addEventListener("submit", function (e) {
     const params = {
         username: document.getElementById("form-username").value,
         password: document.getElementById("form-password").value
@@ -16,11 +23,20 @@ document.getElementById("login-form").addEventListener("submit", function(e) {
         },
         body: json_params
     };
-    fetch( PMAN_IP + '/auth/login', options )
-        .then( response => response.text())
-        .then( response => {
-            setCookie('token', response, 1);
-            window.location.replace("/overview.html");
-        } );
+    fetch(PMAN_IP + '/auth/login', options)
+        .then(response => {
+            if (response.ok) {
+                response.text().then(session_token => {
+                    setCookie('token', session_token, 1);
+                    window.location.replace("/overview.html");
+                });
+            } else {
+                if(response.status === 403) {
+                    sendNotification('Login failed: wrong Username/Password');
+                }else {
+                    sendNotification('Login failed with status code: ' + response.status);
+                }
+            }
+        });
     e.preventDefault();
-  });
+});
